@@ -337,4 +337,15 @@ template {
 [hidden] {
   display: none;
 }
+
+.ns-menu__box {
+  display: flex;
+  justify-content: space-between;
+  max-width: toRem(1200);
+  margin: 0 auto;
+}
+.ns-menu__item {
+  text-decoration: none;
+  text-transform: uppercase;
+}
 /*# sourceMappingURL=main.css.map */
