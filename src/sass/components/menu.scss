@@ -2,6 +2,10 @@
 @import "../utils/mixins";
 
 .ns-menu {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
 
   &__box {
     display: flex;
@@ -9,9 +13,14 @@
     max-width: toRem(1200);
     margin:  auto;
     flex-direction: column;
+    transition:  right 400ms;
+    position: relative;
+    right: -100%;
+    top: -100%;
     @include mq(sm){
       flex-direction: row;
       align-items: center;
+      position: static;
     }
 
   }
@@ -23,13 +32,89 @@
     text-align: center;
     padding: toRem(10);
     transition: all 400ms;
-    @include link-action (gold, silver){
-      text-decoration: underline;
-    }
   }
 
   &__item--active {
 
+  }
+}
+
+
+
+.ns-lines {
+  height: toRem(26);
+  width: toRem(32);
+  position: absolute;
+  top: toRem(20);
+  left: toRem(20);
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  @include mq(sm){
+    display: none;
+  }
+
+  &__line {
+    display: block;
+    height: toRem(4);
+    width: 100%;
+    border-radius: toRem(10);
+    background-color: black;
+
+  }
+  &__line--v1 {
+    transform-origin: 0 0;
+    transition: transform 0.4s ease-in-out;
+    }
+
+
+  &__line--v2 {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  &__line--v3 {
+    transform-origin: 0 100%;
+    transition: transform 0.4s ease-in-out;
+  }
+
+//  &:hover .ns-lines__line--v1 {
+//    transform: rotate(45deg);
+//  }
+//  &:hover .ns-lines__line--v2 {
+//  transform: scaleY(0);
+//  }
+//  &:hover .ns-lines__line--v3 {
+//  transform: rotate(-45deg);
+//}
+}
+
+
+.ns-menu__click {
+  position: absolute;
+  height: toRem(32);
+  width: toRem(32);
+  top: toRem(20);
+  left: toRem(20);
+  z-index: 20;
+  opacity: 0;
+  cursor: pointer;
+
+
+  &:checked + .ns-lines .ns-lines__line--v1 {
+    transform: rotate(45deg);
+  }
+  &:checked + .ns-lines .ns-lines__line--v2 {
+    transform: scaleY(0);
+  }
+  &:checked + .ns-lines .ns-lines__line--v3 {
+    transform: rotate(-45deg);
+  }
+
+  &:checked + .ns-lines + .ns-menu__box{
+    right: 0;
+    top: 0;
   }
 }
 
